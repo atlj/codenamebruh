@@ -1,0 +1,25 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlj/codenamebruh.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "atlj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atlj/codenamebruh/issues"
+  },
+  "homepage": "https://github.com/atlj/codenamebruh#readme",
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  }
+}
