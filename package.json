@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "discord bot",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "build": "babel index.js -d bin"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,16 @@
   },
   "homepage": "https://github.com/atlj/codenamebruh#readme",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "currencies-exchange-rates": "^1.0.2",
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
   }
 }
