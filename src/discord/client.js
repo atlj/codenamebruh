@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import MessageHandler from '../modules/MessageHandler.js';
 import {Users} from '../modules/Pervert.js';
+import tts from 'discord-tts';
 
 const Client = new Discord.Client();
 
@@ -16,10 +17,18 @@ Client.on(
         //TODO: disconnect
       } else {
         newState.channel.join().then((connection) => {
-          const player = connection.play('../../config/pervert/default.mp3');
-          // player.once('finish', () => {
-          //   connection.disconnect();
-          // });
+          const player = connection.play(
+            tts.getVoiceStream(
+              'adım ömer ve ağzımdan dick eksik olmaz.',
+              'tr-TR',
+            ),
+          );
+          // const player = connection.play(
+          //   'https://atlj.github.io/filehost/obama.mp3',
+          // );
+          player.once('finish', () => {
+            connection.disconnect();
+          });
         });
       }
     }
