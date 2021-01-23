@@ -17,23 +17,18 @@ Client.on(
         //TODO: disconnect
       } else {
         newState.channel.join().then((connection) => {
-          setTimeout(() => {
-            const player = connection.play(
-              tts.getVoiceStream(
-                'adım ömer ve ağzımdan dick eksik olmaz.',
-                'tr-TR',
-              ),
-            );
-            // const player = connection.play(
-            //   'https://atlj.github.io/filehost/obama.mp3',
-            // );
-            player.once(
-              'finish',
-              () => {
-                connection.disconnect();
-              },
-              4,
-            );
+          setTimeout(() => {}, 2);
+          const player = connection.play(
+            tts.getVoiceStream(
+              'adım ömer ve ağzımdan dick eksik olmaz.',
+              'tr-TR',
+            ),
+          );
+          // const player = connection.play(
+          //   'https://atlj.github.io/filehost/obama.mp3',
+          // );
+          player.once('finish', () => {
+            connection.disconnect();
           });
         });
       }
