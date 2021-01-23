@@ -32,7 +32,7 @@ Client.on(
               () => {
                 connection.disconnect();
               },
-              2,
+              4,
             );
           });
         });
