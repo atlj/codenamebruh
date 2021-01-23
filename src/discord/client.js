@@ -13,9 +13,13 @@ Client.on(
     //if (oldState.id in Users) {
     console.log(newState);
     if (oldState.channel !== newState.channel) {
-      newState.channel.join().then((connection) => {
-        //connection.play('../../config/pervert/default.mp3');
-      });
+      if (newState.channel === null) {
+        //TODO: disconnect
+      } else {
+        newState.channel.join().then((connection) => {
+          //connection.play('../../config/pervert/default.mp3');
+        });
+      }
     }
   },
   //}

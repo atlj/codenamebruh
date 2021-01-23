@@ -25,7 +25,9 @@
   "dependencies": {
     "currencies-exchange-rates": "^1.0.2",
     "discord.js": "^12.4.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.2.7",
+    "opusscript": "^0.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
