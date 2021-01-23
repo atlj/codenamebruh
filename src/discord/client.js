@@ -17,7 +17,10 @@ Client.on(
         //TODO: disconnect
       } else {
         newState.channel.join().then((connection) => {
-          //connection.play('../../config/pervert/default.mp3');
+          const player = connection.play('../../config/pervert/default.mp3');
+          player.once('finish', () => {
+            connection.disconnect();
+          });
         });
       }
     }
