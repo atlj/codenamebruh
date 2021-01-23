@@ -1,7 +1,6 @@
 import Discord from 'discord.js';
 import MessageHandler from '../modules/MessageHandler.js';
 import {Users} from '../modules/Pervert.js';
-import fs from 'fs';
 
 const Client = new Discord.Client();
 
@@ -18,9 +17,9 @@ Client.on(
       } else {
         newState.channel.join().then((connection) => {
           const player = connection.play('../../config/pervert/default.mp3');
-          player.once('finish', () => {
-            connection.disconnect();
-          });
+          // player.once('finish', () => {
+          //   connection.disconnect();
+          // });
         });
       }
     }
