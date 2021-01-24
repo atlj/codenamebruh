@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "push": "git push heroku master",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check --watch",
     "start": "babel-node -x \".ts\" src/index.ts",
-    "heroku-start": "babel-node -x \".ts\" src/index.ts"
+    "heroku-start": "node dist/index.js",
+    "postinstall": "tsc",
+    "watch-ts": "tsc-w"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,9 @@
     "url": "https://github.com/atlj/codenamebruh/issues"
   },
   "homepage": "https://github.com/atlj/codenamebruh#readme",
+  "engines": {
+    "node": "15.0.1"
+  },
   "dependencies": {
     "currencies-exchange-rates": "^1.0.2",
     "discord-tts": "^1.0.3",
