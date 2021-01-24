@@ -1,9 +1,8 @@
-//Entrypoint
+//Entry point
 
 //dotenv config
 import dotenv from 'dotenv';
 dotenv.config();
 
-import app from './app.js';
-
+import app from './app';
 app(process.env.TOKEN);
