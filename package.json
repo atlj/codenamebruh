@@ -7,7 +7,8 @@
     "push": "git push heroku master",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check --watch",
-    "start": "babel-node -x \".ts\" src/index.ts"
+    "start": "babel-node -x \".ts\" src/index.ts",
+    "heroku-start": "npm install -g @babel/cli && babel-node -x \".ts\" src/index.ts"
   },
   "repository": {
     "type": "git",
