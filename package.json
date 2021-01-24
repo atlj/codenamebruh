@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "push": "git push heroku master",
     "start": "ts-node ./src/index.ts",
-    "heroku-start": "tsc && node dist/index.js",
+    "heroku-start": "yarn postinstall && node dist/index.js",
     "postinstall": "tsc",
     "watch-ts": "tsc -w"
   },
