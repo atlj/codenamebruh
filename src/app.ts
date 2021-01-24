@@ -1,5 +1,5 @@
-import Client from "./discord/Client"
+import Client from './discord/Client';
 
-export default (token:string): void=>{
-    Client.login(token)
-}
+export default (token: string): void => {
+  Client.login(token);
+};
