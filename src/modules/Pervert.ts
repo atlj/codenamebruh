@@ -21,7 +21,8 @@ const UsersFileLocation: string = path.join(
 const SoundsFolder: string = path.join(__dirname, '..', 'config', 'sounds');
 
 const AddUsertoPervertList = (id: string, mode: mode) => {
-  fs.readFile(UsersFileLocation, (err, data) => {
+  fs.readFile(UsersFileLocation, (err: NodeJS.ErrnoException, data: Buffer) => {
+    if (err) throw err;
     let Users: Users = JSON.parse(data.toString());
     Users = { ...Users, [id]: mode };
     fs.writeFile(UsersFileLocation, JSON.stringify(Users), () => {});
@@ -29,7 +30,8 @@ const AddUsertoPervertList = (id: string, mode: mode) => {
 };
 
 const RemoveUserfromPervertList = (id: string) => {
-  fs.readFile(UsersFileLocation, (err, data) => {
+  fs.readFile(UsersFileLocation, (err: NodeJS.ErrnoException, data: Buffer) => {
+    if (err) throw err;
     let Users: Users = JSON.parse(data.toString());
     delete Users[id];
     fs.writeFile(UsersFileLocation, JSON.stringify(Users), () => {});
@@ -65,7 +67,8 @@ export default (
   oldState: Discord.VoiceState,
   newState: Discord.VoiceState,
 ): void => {
-  fs.readFile(UsersFileLocation, (err, data) => {
+  fs.readFile(UsersFileLocation, (err: NodeJS.ErrnoException, data: Buffer) => {
+    if (err) throw err;
     const Users: object = JSON.parse(data.toString());
 
     if (oldState.id in Users) {
