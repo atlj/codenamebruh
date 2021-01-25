@@ -1,4 +1,4 @@
-import {FindUserID} from '../discord/Client';
+import { FindUserID } from '../discord/Client';
 import {
   AddUsertoPervertList,
   RemoveUserfromPervertList,

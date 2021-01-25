@@ -15,5 +15,5 @@ Client.on('voiceStateUpdate', (oldState, newState) =>
   Pervert(oldState, newState),
 );
 
-export {FindUserID};
+export { FindUserID };
 export default Client;

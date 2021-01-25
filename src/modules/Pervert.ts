@@ -1,7 +1,7 @@
-import Discord, {User} from 'discord.js';
+import Discord, { User } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
-import {getVoiceStream} from 'discord-tts';
+import { getVoiceStream } from 'discord-tts';
 
 interface mode {
   mode: string;
@@ -23,7 +23,7 @@ const SoundsFolder: string = path.join(__dirname, '..', 'config', 'sounds');
 const AddUsertoPervertList = (id: string, mode: mode) => {
   fs.readFile(UsersFileLocation, (err, data) => {
     let Users: Users = JSON.parse(data.toString());
-    Users = {...Users, [id]: mode};
+    Users = { ...Users, [id]: mode };
     fs.writeFile(UsersFileLocation, JSON.stringify(Users), () => {});
   });
 };
@@ -59,7 +59,7 @@ const Haunt = (newState: Discord.VoiceState, mode: mode) => {
   });
 };
 
-export {AddUsertoPervertList, RemoveUserfromPervertList, ListUsers};
+export { AddUsertoPervertList, RemoveUserfromPervertList, ListUsers };
 
 export default (
   oldState: Discord.VoiceState,
