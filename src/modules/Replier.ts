@@ -1,11 +1,7 @@
-import { REPLIES } from '@/utils/constants';
-import CurrencyKeywords from '../config/currency/keywords.json';
+import { REPLIES, CURRENCY_KEYWORDS } from '@/utils/constants';
 
-export default (message: string): string | boolean => {
-  for (let index = 0; index < CurrencyKeywords.length; index++) {
-    if (message.includes(CurrencyKeywords[index])) {
-      return REPLIES.sample();
-    }
+export default (message: string): string | false => {
+  if (message.split(' ').some((e) => CURRENCY_KEYWORDS.includes(e))) {
+    return REPLIES.sample();
   }
-  return false;
 };
