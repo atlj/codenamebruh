@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import path from 'path';
 import { getVoiceStream } from 'discord-tts';
-import { PervertUser } from '../models/PervertUser';
+import { PervertUser } from '@/models/PervertUser';
 
 const SoundsFolder: string = path.join(__dirname, '..', 'config', 'sounds');
 

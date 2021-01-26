@@ -10,4 +10,5 @@ Array.prototype.sample = function () {
 
 import dotenv from 'dotenv';
 import 'module-alias/register';
+import 'reflect-metadata';
 dotenv.config();

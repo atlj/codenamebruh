@@ -1,6 +1,6 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { createConnection, Connection, getConnection } from 'typeorm';
-import { PervertUser } from '../models/PervertUser';
+import { PervertUser } from '@/models/PervertUser';
 
 const ConnectionOptions: PostgresConnectionOptions = {
   type: 'postgres',
