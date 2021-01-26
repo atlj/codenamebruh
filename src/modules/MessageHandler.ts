@@ -11,9 +11,9 @@ export default (message: Discord.Message): void => {
       message.reply(action);
     });
   } else {
-    const Reply: string | boolean = Replier(message.content);
-    if (Reply !== false) {
-      message.reply(Reply);
+    const reply = Replier(message.content);
+    if (reply) {
+      message.reply(reply);
     }
   }
 };
