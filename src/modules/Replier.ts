@@ -1,15 +1,7 @@
-import CurrencyReplies from '../config/currency/replies.json';
-import CurrencyKeywords from '../config/currency/keywords.json';
+import { REPLIES, CURRENCY_KEYWORDS } from '@/utils/constants';
 
-const Randomiser = (list: Array<string>): string => {
-  return list[Math.floor(Math.random() * list.length)];
-};
-
-export default (message: string): string | boolean => {
-  for (let index = 0; index < CurrencyKeywords.length; index++) {
-    if (message.includes(CurrencyKeywords[index])) {
-      return Randomiser(CurrencyReplies);
-    }
+export default (message: string): string | undefined => {
+  if (message.split(' ').some((e) => CURRENCY_KEYWORDS.includes(e))) {
+    return REPLIES.sample();
   }
-  return false;
 };

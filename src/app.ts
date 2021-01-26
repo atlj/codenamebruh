@@ -1,6 +1,5 @@
-import Client from './discord/Client';
-import 'reflect-metadata';
-import { ConnectDB } from './services/Database';
+import Client from '@/discord/Client';
+import { ConnectDB } from '@/services/Database';
 
 export default (token: string): void => {
   ConnectDB().then(() => {
