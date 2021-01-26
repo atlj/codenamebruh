@@ -1,4 +1,4 @@
-import Discord, { User } from 'discord.js';
+import Discord from 'discord.js';
 import path from 'path';
 import { getVoiceStream } from 'discord-tts';
 import { PervertUser } from '../models/PervertUser';
