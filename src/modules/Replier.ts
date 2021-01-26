@@ -1,7 +1,7 @@
-import { REPLIES, CURRENCY_KEYWORDS } from '@/utils/constants';
+import { CURRENCY_REPLIES, CURRENCY_KEYWORDS } from '@/utils/Constants';
 
 export default (message: string): string | undefined => {
   if (message.split(' ').some((e) => CURRENCY_KEYWORDS.includes(e))) {
-    return REPLIES.sample();
+    return CURRENCY_REPLIES.sample();
   }
 };
