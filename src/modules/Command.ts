@@ -1,10 +1,15 @@
-import { FindUserID } from '../discord/Client';
+import Discord from 'discord.js';
 import { PervertUser } from '../models/PervertUser';
 
-const HandlePervert = async (Arguments: Array<string>) => {
-  if (Arguments[1] === 'add') {
-    const userId = FindUserID(Arguments[2]);
-    if (userId !== false) {
+const HandlePervert = async (
+  message: Discord.Message,
+  Arguments: Array<string>,
+): Promise<string> => {
+  let userIds = message.mentions.users;
+
+  if (userIds.array().length === 1) {
+    const userId: string = userIds.array()[0].id;
+    if (Arguments[1] === 'add') {
       if (Arguments[3] === 'tts') {
         await PervertUser.createUser(
           userId,
@@ -16,20 +21,19 @@ const HandlePervert = async (Arguments: Array<string>) => {
         await PervertUser.createUser(userId, Arguments[3], '');
       }
       return 'added';
-    } else {
-      return 'no user named **' + Arguments[2] + '**';
-    }
-  } else if (Arguments[1] === 'remove') {
-    const userId = FindUserID(Arguments[2]);
-    if (userId !== false) {
+    } else if (Arguments[1] === 'remove') {
       await PervertUser.removeUser(userId);
       return 'removed';
+    } else if (Arguments[1] === 'list') {
+      const users = await PervertUser.toString();
+      return users;
     } else {
-      return 'no user named **' + Arguments[2] + '**';
+      return (
+        'the command is incorrect, try **' +
+        process.env.COMMANDPREFIX +
+        'help**'
+      );
     }
-  } else if (Arguments[1] === 'list') {
-    const users = await PervertUser.toString();
-    return users;
   } else {
     return (
       'the command is incorrect, try **' + process.env.COMMANDPREFIX + 'help**'
@@ -37,14 +41,14 @@ const HandlePervert = async (Arguments: Array<string>) => {
   }
 };
 
-export default async (message: string): Promise<string> => {
-  const Command: string = message.slice(1, message.length);
-  const Arguments: Array<string> = Command.split(' ');
+export default async (message: Discord.Message): Promise<string> => {
+  const Command: string = message.content.slice(1, message.content.length);
+  let Arguments: Array<string> = Command.split(' ');
   console.log('args:', Arguments);
 
   switch (Arguments[0]) {
     case 'pervert':
-      const response = await HandlePervert(Arguments);
+      const response = await HandlePervert(message, Arguments);
       return response;
     default:
       return 'no matching command for ' + '**' + Arguments[0] + '**';
