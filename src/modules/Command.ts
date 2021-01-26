@@ -1,11 +1,7 @@
 import { FindUserID } from '../discord/Client';
-import {
-  AddUsertoPervertList,
-  RemoveUserfromPervertList,
-  ListUsers,
-} from './Pervert';
+import { PervertUser } from '../models/PervertUser';
 
-export default (message: string): string => {
+export default async (message: string): Promise<string> => {
   const Command: string = message.slice(1, message.length);
   const Arguments: Array<string> = Command.split(' ');
   console.log('args:', Arguments);
@@ -14,21 +10,25 @@ export default (message: string): string => {
     case 'pervert':
       if (Arguments[1] === 'add') {
         if (Arguments[3] === 'tts') {
-          AddUsertoPervertList(FindUserID(Arguments[2]), {
-            mode: Arguments[3],
-            data: Arguments.splice(4, Arguments.length - 4).join(' '),
-          });
+          await PervertUser.createUser(
+            FindUserID(Arguments[2]),
+            'tts',
+            Arguments.splice(4, Arguments.length - 4).join(' '),
+          );
         } else {
-          AddUsertoPervertList(FindUserID(Arguments[2]), {
-            mode: Arguments[3],
-          });
+          await PervertUser.createUser(
+            FindUserID(Arguments[2]),
+            Arguments[3],
+            '',
+          );
         }
         return 'added';
       } else if (Arguments[1] === 'remove') {
-        RemoveUserfromPervertList(FindUserID(Arguments[2]));
+        await PervertUser.removeUser(FindUserID(Arguments[2]));
         return 'removed';
       } else if (Arguments[1] === 'list') {
-        return ListUsers();
+        const users = await PervertUser.toString();
+        return users;
       }
       break;
 
