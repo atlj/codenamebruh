@@ -23,7 +23,7 @@
     "url": "https://github.com/atlj/codenamebruh/issues"
   },
   "_moduleAliases": {
-    "@/": "src/"
+    "@": "./src"
   },
   "engines": {
     "node": "15.0.1"
