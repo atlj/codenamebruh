@@ -7,7 +7,11 @@
     "sourceMap": true,
     "outDir": "dist",
     "resolveJsonModule": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "lib": ["es2015"]
 }

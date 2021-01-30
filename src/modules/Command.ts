@@ -1,5 +1,7 @@
 import Discord from 'discord.js';
+
 import { PervertUser } from '../models/PervertUser';
+
 
 const HandlePervert = async (
   message: Discord.Message,
