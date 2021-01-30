@@ -7,7 +7,7 @@ export default (message: Discord.Message): void => {
     message.content.indexOf(process.env.COMMANDPREFIX) === 0 &&
     message.member.hasPermission('ADMINISTRATOR')
   ) {
-    Command(message.content).then((action) => {
+    Command(message).then((action) => {
       message.reply(action);
     });
   } else {
