@@ -26,6 +26,9 @@
   "_moduleAliases": {
     "@": "./src"
   },
+  "engines": {
+    "node": "15.0.1"
+  },
   "homepage": "https://github.com/atlj/codenamebruh#readme",
   "dependencies": {
     "currencies-exchange-rates": "^1.0.2",
