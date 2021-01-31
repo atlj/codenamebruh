@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "push": "git push heroku master",
-    "start": "ts-node ./src/index.ts",
-    "heroku-start": "node dist/index.js",
-    "postinstall": "tsc",
-    "watch-ts": "tsc -w"
+    "start": "ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
