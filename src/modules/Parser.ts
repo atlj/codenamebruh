@@ -54,12 +54,12 @@ class Branch {
           return 'Expected ' + element.field.toString();
         }
         //Checks if a userid is given via mention
-        if (element.field === ['$userid']) {
+        if (element.field.indexOf('$userid') !== -1) {
           //TODO
         }
         //from now on there is else if because we do not want program to check the field var
         //Checks if a valid youtube link given
-        else if (element.field === ['$youtubelink']) {
+        else if (element.field.indexOf('$youtubelink') !== -1) {
           //TODO
         }
         //If the given arg doesnt match any of the predefined ones
@@ -114,7 +114,6 @@ class Command {
   constructor(argumentList: Argument[]) {
     this.argumentList = argumentList;
   }
-
   checker(lexedCommand: Array<string>): string | true {
     for (let index = 0; index < this.argumentList.length; index++) {
       const element: Argument = this.argumentList[index];
@@ -129,12 +128,12 @@ class Command {
           return 'Expected ' + element.field.toString();
         }
         //Checks if a userid is given via mention
-        if (element.field === ['$userid']) {
+        if (element.field.indexOf('$userid') !== -1) {
           //TODO
         }
-        //from now on there is else if because we do not want program to check the field var
+        //from now on there is else if because we do not want program to check the field variable
         //Checks if a valid youtube link given
-        else if (element.field === ['$youtubelink']) {
+        else if (element.field.indexOf('$youtubelink') !== -1) {
           //TODO
         }
         //If the given arg doesnt match any of the predefined ones
