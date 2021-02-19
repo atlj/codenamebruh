@@ -5,6 +5,12 @@ import Pervert from '../modules/Pervert';
 const Client = new Discord.Client();
 
 // Handlers
+Client.on('ready', () => {
+  //Presence
+  Client.user.setPresence({
+    activity: { type: 'LISTENING', name: 'Created by @atlj' },
+  });
+});
 Client.on('message', (message): void => {
   if (Client.user.id !== message.member.id) {
     // Bot won't track itself
