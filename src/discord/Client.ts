@@ -4,22 +4,13 @@ import Pervert from '../modules/Pervert';
 
 const Client = new Discord.Client();
 
-//Deprecated for now, use mentioning instead
-const FindUserID = (Username: string): string | false => {
-  console.log(Client.users);
-
-  const user: Discord.User | undefined = Client.users.cache.find(
-    (user) => user.username === Username,
-  );
-
-  if (user !== undefined) {
-    return user.id;
-  } else {
-    return false;
-  }
-};
-
 // Handlers
+Client.on('ready', () => {
+  //Presence
+  Client.user.setPresence({
+    activity: { type: 'LISTENING', name: 'Created by @atlj' },
+  });
+});
 Client.on('message', (message): void => {
   if (Client.user.id !== message.member.id) {
     // Bot won't track itself
@@ -33,5 +24,4 @@ Client.on('voiceStateUpdate', (oldState, newState): void => {
   }
 });
 
-export { FindUserID };
 export default Client;
