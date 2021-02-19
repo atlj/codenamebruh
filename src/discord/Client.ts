@@ -4,21 +4,6 @@ import Pervert from '../modules/Pervert';
 
 const Client = new Discord.Client();
 
-//Deprecated for now, use mentioning instead
-const FindUserID = (Username: string): string | false => {
-  console.log(Client.users);
-
-  const user: Discord.User | undefined = Client.users.cache.find(
-    (user) => user.username === Username,
-  );
-
-  if (user !== undefined) {
-    return user.id;
-  } else {
-    return false;
-  }
-};
-
 // Handlers
 Client.on('message', (message): void => {
   if (Client.user.id !== message.member.id) {
@@ -33,5 +18,4 @@ Client.on('voiceStateUpdate', (oldState, newState): void => {
   }
 });
 
-export { FindUserID };
 export default Client;

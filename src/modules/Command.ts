@@ -1,5 +1,7 @@
 import Discord from 'discord.js';
 import { PervertUser } from '../models/PervertUser';
+import { lexer } from './Parser';
+import { pervertCommand } from './Pervert';
 
 const HandlePervert = async (
   message: Discord.Message,
@@ -42,13 +44,16 @@ const HandlePervert = async (
 };
 
 export default async (message: Discord.Message): Promise<string> => {
-  const Command: string = message.content.slice(1, message.content.length);
-  let Arguments: Array<string> = Command.split(' ');
+  let Arguments = lexer(message.content);
   console.log('args:', Arguments);
 
   switch (Arguments[0]) {
     case 'pervert':
-      const response = await HandlePervert(message, Arguments);
+      let result: true | string;
+      let response: string;
+      result = pervertCommand.checker(lexer(message.content), message);
+      result === true ? (response = 'Ok') : (response = result);
+      //const response = await HandlePervert(message, Arguments);
       return response;
     default:
       return 'no matching command for ' + '**' + Arguments[0] + '**';

@@ -1,3 +1,5 @@
+import Discord from 'discord.js';
+
 //Slices the command into tokens.
 //command arg1 arg2 => ["command", "arg1", "arg2"]
 const lexer = (command: string): Array<string> => {
@@ -40,7 +42,10 @@ class Branch {
   constructor(argumentList: Argument[]) {
     this.argumentList = argumentList;
   }
-  checker(lexedCommand: Array<string>): string | true {
+  checker(
+    lexedCommand: Array<string>,
+    message: Discord.Message,
+  ): string | true {
     for (let index = 0; index < this.argumentList.length; index++) {
       const element: Argument = this.argumentList[index];
       log('\n');
@@ -55,9 +60,11 @@ class Branch {
         }
         //Checks if a userid is given via mention
         if (element.field.indexOf('$userid') !== -1) {
-          //TODO
+          if (message.mentions.users.array().length !== 1) {
+            return 'To complete the operation you need to mention a user.';
+          }
         }
-        //from now on there is else if because we do not want program to check the field var
+        //from now on there is else if because we do not want program to check the field variable
         //Checks if a valid youtube link given
         else if (element.field.indexOf('$youtubelink') !== -1) {
           //TODO
@@ -114,7 +121,10 @@ class Command {
   constructor(argumentList: Argument[]) {
     this.argumentList = argumentList;
   }
-  checker(lexedCommand: Array<string>): string | true {
+  checker(
+    lexedCommand: Array<string>,
+    message: Discord.Message,
+  ): string | true {
     for (let index = 0; index < this.argumentList.length; index++) {
       const element: Argument = this.argumentList[index];
       log('\n');
@@ -129,7 +139,9 @@ class Command {
         }
         //Checks if a userid is given via mention
         if (element.field.indexOf('$userid') !== -1) {
-          //TODO
+          if (message.mentions.users.array().length !== 1) {
+            return 'To complete the operation you need to mention a user.';
+          }
         }
         //from now on there is else if because we do not want program to check the field variable
         //Checks if a valid youtube link given
@@ -182,46 +194,4 @@ class Command {
     return true;
   }
 }
-
-const addbranchArgs = [
-  new Argument('required', ['add']),
-  new Argument('required', ['$userid']),
-  new Argument(
-    'required branch',
-    ['tts', 'youtube'],
-    [
-      new Branch([
-        new Argument('required', ['tts']),
-        new Argument('long', ['Text for tts']),
-      ]),
-      new Branch([
-        new Argument('required', ['youtube']),
-        new Argument('required', ['$youtubelink']),
-      ]),
-    ],
-  ),
-];
-const listbranchArgs = [new Argument('required', ['list'])];
-const removebranchArgs = [new Argument('required', ['remove'])];
-
-const branchlist = [
-  new Branch(addbranchArgs),
-  new Branch(listbranchArgs),
-  new Branch(removebranchArgs),
-];
-
-const pervertArgs: Argument[] = [
-  new Argument('required', ['pervert']),
-  new Argument(
-    'required branch',
-    ['add', 'list', 'remove'],
-    [
-      new Branch(addbranchArgs),
-      new Branch(listbranchArgs),
-      new Branch(removebranchArgs),
-    ],
-  ),
-];
-
-const pervertCommand = new Command(pervertArgs);
-export { Command, Branch, Argument, pervertCommand, lexer };
+export { Command, Branch, Argument, lexer };
