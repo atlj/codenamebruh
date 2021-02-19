@@ -32,8 +32,15 @@ class Argument {
     this.field = field;
     this.branches = branches;
   }
-  branchcheck(branchname: string, lexedCommand: Array<string>): true | string {
-    return this.branches[this.field.indexOf(branchname)].checker(lexedCommand);
+  branchcheck(
+    branchname: string,
+    lexedCommand: Array<string>,
+    message: Discord.Message,
+  ): true | string {
+    return this.branches[this.field.indexOf(branchname)].checker(
+      lexedCommand,
+      message,
+    );
   }
 }
 
@@ -98,6 +105,7 @@ class Branch {
         let branchcheck = element.branchcheck(
           lexedCommand[index],
           lexedCommand.slice(index, lexedCommand.length),
+          message,
         );
         if (branchcheck !== true) {
           return branchcheck;
@@ -177,6 +185,7 @@ class Command {
         let branchcheck = element.branchcheck(
           lexedCommand[index],
           lexedCommand.slice(index, lexedCommand.length),
+          message,
         );
         if (branchcheck !== true) {
           return branchcheck;
