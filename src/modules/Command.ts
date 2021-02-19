@@ -52,10 +52,24 @@ export default async (message: Discord.Message): Promise<string> => {
       let result: true | string;
       let response: string;
       result = pervertCommand.checker(lexer(message.content), message);
-      result === true ? (response = 'Ok') : (response = result);
+      result === true
+        ? (response = 'Ok')
+        : (response =
+            result +
+            '\n``You can type ' +
+            process.env.COMMANDPREFIX +
+            'help for further information``');
       //const response = await HandlePervert(message, Arguments);
       return response;
     default:
-      return 'no matching command for ' + '**' + Arguments[0] + '**';
+      return (
+        'no matching command for ' +
+        '**' +
+        Arguments[0] +
+        '**' +
+        '\n``You can type ' +
+        process.env.COMMANDPREFIX +
+        'help for further information``'
+      );
   }
 };

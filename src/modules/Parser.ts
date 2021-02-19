@@ -63,7 +63,11 @@ class Branch {
         //If the arg is blank
         if (lexedCommand[index] === undefined) {
           log('the argument is undefined, lexedCommand is: ' + lexedCommand);
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete.you need to give one of these arguments: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //Checks if a userid is given via mention
         if (element.field.indexOf('$userid') !== -1) {
@@ -85,17 +89,33 @@ class Branch {
           log(element.field);
           log(lexedCommand);
           log(lexedCommand[index]);
-          return 'Expected ' + element.field.toString();
+          return (
+            'Given argument is incorrect (**' +
+            lexedCommand[index] +
+            '**). You need to use one of these arguments instead: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //Required branches
       } else if (element.type === 'required branch') {
         //If the arg is blank
         if (lexedCommand[index] === undefined) {
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete.you need to give one of these arguments: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //If the given arg doesnt match any of the predefined ones
         if (element.field.indexOf(lexedCommand[index]) === -1) {
-          return 'Expected ' + element.field.toString();
+          return (
+            'Given argument is incorrect (**' +
+            lexedCommand[index] +
+            '**). You need to use one of these arguments instead: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         log('running branch checker, this triggered: ' + lexedCommand[index]);
         log(
@@ -114,7 +134,10 @@ class Branch {
       } else if (element.type === 'long') {
         if (lexedCommand[index] === undefined) {
           //Fields of long arguments is for description so if an illegal arg is given, checker throws the description
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete. You need to give an argument for: ' +
+            element.field.toString()
+          );
         }
       }
       //else if (element.type==="optional"){}
@@ -143,7 +166,11 @@ class Command {
         //If the arg is blank
         if (lexedCommand[index] === undefined) {
           log('the argument is undefined, lexedCommand is: ' + lexedCommand);
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete.you need to give one of these arguments: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //Checks if a userid is given via mention
         if (element.field.indexOf('$userid') !== -1) {
@@ -165,17 +192,33 @@ class Command {
           log(element.field);
           log(lexedCommand);
           log(lexedCommand[index]);
-          return 'Expected ' + element.field.toString();
+          return (
+            'Given argument is incorrect (**' +
+            lexedCommand[index] +
+            '**). You need to use one of these arguments instead: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //Required branches
       } else if (element.type === 'required branch') {
         //If the arg is blank
         if (lexedCommand[index] === undefined) {
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete.you need to give one of these arguments: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         //If the given arg doesnt match any of the predefined ones
         if (element.field.indexOf(lexedCommand[index]) === -1) {
-          return 'Expected ' + element.field.toString();
+          return (
+            'Given argument is incorrect (**' +
+            lexedCommand[index] +
+            '**). You need to use one of these arguments instead: **' +
+            element.field.toString() +
+            '**'
+          );
         }
         log('running branch checker, this triggered: ' + lexedCommand[index]);
         log(
@@ -194,7 +237,10 @@ class Command {
       } else if (element.type === 'long') {
         if (lexedCommand[index] === undefined) {
           //Fields of long arguments is for description so if an illegal arg is given, checker throws the description
-          return 'Expected ' + element.field.toString();
+          return (
+            'Command is incomplete. You need to give an argument for: ' +
+            element.field.toString()
+          );
         }
       }
       //else if (element.type==="optional"){}
