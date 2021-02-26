@@ -56,7 +56,10 @@ const addbranchArgs = [
   ),
 ];
 const listbranchArgs = [new Argument('required', ['list'])];
-const removebranchArgs = [new Argument('required', ['remove'])];
+const removebranchArgs = [
+  new Argument('required', ['remove']),
+  new Argument('required', ['$userid']),
+];
 
 const pervertArgs: Argument[] = [
   new Argument('required', ['pervert']),
