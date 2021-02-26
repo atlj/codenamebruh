@@ -5,6 +5,7 @@ import Replier from './Replier';
 export default (message: Discord.Message): void => {
   if (
     message.content.indexOf(process.env.COMMANDPREFIX) === 0 &&
+    //TODO add permission system
     message.member.hasPermission('ADMINISTRATOR')
   ) {
     Command(message).then((action) => {

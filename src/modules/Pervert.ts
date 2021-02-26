@@ -2,6 +2,7 @@ import Discord from 'discord.js';
 import path from 'path';
 import { getVoiceStream } from 'discord-tts';
 import { PervertUser } from '../models/PervertUser';
+import { Command, Branch, Argument } from './Parser';
 
 const SoundsFolder: string = path.join(__dirname, '..', 'config', 'sounds');
 
@@ -35,3 +36,44 @@ export default (
     }
   });
 };
+
+const addbranchArgs = [
+  new Argument('required', ['add']),
+  new Argument('required', ['$userid']),
+  new Argument(
+    'required branch',
+    ['tts', 'youtube'],
+    [
+      new Branch([
+        new Argument('required', ['tts']),
+        new Argument('long', ['Text for tts']),
+      ]),
+      new Branch([
+        new Argument('required', ['youtube']),
+        new Argument('required', ['$youtubelink']),
+      ]),
+    ],
+  ),
+];
+const listbranchArgs = [new Argument('required', ['list'])];
+const removebranchArgs = [
+  new Argument('required', ['remove']),
+  new Argument('required', ['$userid']),
+];
+
+const pervertArgs: Argument[] = [
+  new Argument('required', ['pervert']),
+  new Argument(
+    'required branch',
+    ['add', 'list', 'remove'],
+    [
+      new Branch(addbranchArgs),
+      new Branch(listbranchArgs),
+      new Branch(removebranchArgs),
+    ],
+  ),
+];
+
+const pervertCommand = new Command(pervertArgs);
+
+export { pervertCommand };
