@@ -1,16 +1,31 @@
 import Discord from 'discord.js';
-import path from 'path';
+import ytdl from 'ytdl-core';
 import { getVoiceStream } from 'discord-tts';
 import { PervertUser } from '../models/PervertUser';
 import { Command, Branch, Argument } from './Parser';
 
-const SoundsFolder: string = path.join(__dirname, '..', 'config', 'sounds');
-
 const Haunt = (newState: Discord.VoiceState, user: PervertUser) => {
   newState.channel.join().then((Connection): void => {
     setTimeout(() => {
-      if (user.mode === 'obama') {
-        const Player = Connection.play(path.join(SoundsFolder, 'obama.mp3'));
+      if (user.mode === 'yt') {
+        const stream = ytdl(user.data, { quality: 'highestaudio' });
+        let Player: Discord.StreamDispatcher;
+        console.log(user);
+
+        if (user.duration !== '') {
+          const durationArray = user.duration.split('-');
+          const startSecond = Number.parseFloat(durationArray[0]);
+          const endSecond = Number.parseFloat(durationArray[1]);
+
+          Player = Connection.play(stream, { seek: startSecond });
+          Player.once('start', () => {
+            setTimeout(() => {
+              Player.end();
+            }, (endSecond - startSecond) * 1000);
+          });
+        } else {
+          Player = Connection.play(stream);
+        }
         Player.once('finish', () => {
           Connection.disconnect();
         });
@@ -42,15 +57,16 @@ const addbranchArgs = [
   new Argument('required', ['$userid']),
   new Argument(
     'required branch',
-    ['tts', 'youtube'],
+    ['tts', 'yt'],
     [
       new Branch([
         new Argument('required', ['tts']),
         new Argument('long', ['Text for tts']),
       ]),
       new Branch([
-        new Argument('required', ['youtube']),
+        new Argument('required', ['yt']),
         new Argument('required', ['$youtubelink']),
+        new Argument('optional', ['$margin']),
       ]),
     ],
   ),
