@@ -9,15 +9,19 @@ export class PervertUser {
   discordId: string; //Unique discord id
 
   @Column('varchar')
-  mode: 'tts' | 'obama' | 'bruh' | string; //Bot plays sounds according to this variable
+  mode: 'tts' | 'yt' | string; //Bot plays sounds according to this variable
 
   @Column('text')
   data: string; //When mode is set to "tts", this column is the text tts processes
+
+  @Column('text')
+  duration: string; //When the mode is youtube bot will play as this value
 
   static async createUser(
     discordId: string,
     mode: string,
     data: string,
+    duration: string = '',
   ): Promise<PervertUser> {
     const userRepo = getRepository(PervertUser);
     const listUser = await userRepo.find({ where: { discordId: discordId } }); //Looks if there is already an entity in for specified Discord id.
@@ -27,6 +31,7 @@ export class PervertUser {
       const user = listUser[0];
       user.mode = mode;
       user.data = data;
+      user.duration = duration;
 
       await userRepo.save(user);
       return user;
@@ -36,6 +41,7 @@ export class PervertUser {
       user.discordId = discordId;
       user.mode = mode;
       user.data = data;
+      user.duration = duration;
 
       await userRepo.save(user);
       return user;

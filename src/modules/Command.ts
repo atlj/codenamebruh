@@ -18,9 +18,13 @@ const HandlePervert = async (
         'tts',
         Arguments.splice(4, Arguments.length - 4).join(' '), //joins the sentence which will be used by tts
       );
-    } else {
-      //TODO: add control to what can get added besides tts i.e.: obama and bruh can be added for now
-      await PervertUser.createUser(userId, Arguments[3], '');
+    } else if (Arguments[3] === 'yt') {
+      await PervertUser.createUser(
+        userId,
+        'yt',
+        Arguments[4],
+        Arguments[5] === undefined ? '' : Arguments[5],
+      );
     }
     return 'added';
   } else if (Arguments[1] === 'remove') {
@@ -41,11 +45,11 @@ const HandleYoutube = async (
   Arguments: Array<string>,
 ) => {
   //A is capital on Arguments because of typescript
-  const player = new YoutubePlayer(message);
+  const player = new YoutubePlayer();
   const searchResult = await player.search(
     Arguments.splice(1, Arguments.length).join(' '),
   );
-  player.connect().then(() => {
+  player.connect(message.member.voice.channel).then(() => {
     player.play(searchResult.url);
   });
 };
