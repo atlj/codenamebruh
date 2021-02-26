@@ -76,10 +76,6 @@ class Branch {
           }
         }
         //from now on there is else if because we do not want program to check the field variable
-        //Checks if a valid youtube link given
-        else if (element.field.indexOf('$youtubelink') !== -1) {
-          //TODO
-        }
         //If the given arg doesnt match any of the predefined ones
         else if (element.field.indexOf(lexedCommand[index]) === -1) {
           log(
