@@ -15,20 +15,13 @@ interface searchResults {
 }
 
 class YoutubePlayer {
-  message: Discord.Message;
-  videoName: string;
-  channel: Discord.VoiceChannel;
   connection: Discord.VoiceConnection;
   player: Discord.StreamDispatcher;
   searchOptions: ytsr.Options = { limit: 1, safeSearch: false, gl: 'TR' };
-  constructor(message: Discord.Message) {
-    this.message = message;
-    this.channel = message.member.voice.channel;
-  }
 
-  async connect(): Promise<true | string> {
-    if (this.channel !== null) {
-      this.connection = await this.channel.join();
+  async connect(channel: Discord.VoiceChannel): Promise<true | string> {
+    if (channel !== null) {
+      this.connection = await channel.join();
       return true;
     } else {
       return 'You have to join to a channel in order to play audio.';
@@ -49,9 +42,15 @@ class YoutubePlayer {
     return '**Playing:** ' + youtubelink;
   }
 
+  disconnect() {
+    if (this.connection !== undefined) {
+      this.connection.disconnect();
+    }
+  }
+
   stop() {
     if (this.connection !== undefined && this.player !== undefined) {
-      this.player.destroy();
+      this.player.end();
     }
   }
 }
