@@ -2,7 +2,7 @@ import ytdl from 'ytdl-core';
 import ytsr from 'ytsr'; //This module is for youtube search
 import Discord from 'discord.js';
 
-import { Argument, Branch, Command } from './Parser';
+import { Argument, Command } from './Parser';
 
 const youtubeCommand = new Command([
   new Argument('required', ['play', 'p']),
@@ -42,13 +42,13 @@ class YoutubePlayer {
     return '**Playing:** ' + youtubelink;
   }
 
-  disconnect() {
+  disconnect(): void {
     if (this.connection !== undefined) {
       this.connection.disconnect();
     }
   }
 
-  stop() {
+  stop(): void {
     if (this.connection !== undefined && this.player !== undefined) {
       this.player.end();
     }

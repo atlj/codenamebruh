@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import Discord from 'discord.js';
 import { PervertUser } from '../models/PervertUser';
 import { lexer } from './Parser';
@@ -8,7 +9,7 @@ const HandlePervert = async (
   message: Discord.Message,
   Arguments: Array<string>,
 ): Promise<string> => {
-  let userIds = message.mentions.users;
+  const userIds = message.mentions.users;
 
   const userId: string = userIds.array()[0].id;
   if (Arguments[1] === 'add') {
@@ -55,14 +56,16 @@ const HandleYoutube = async (
 };
 
 export default async (message: Discord.Message): Promise<string> => {
-  let Arguments = lexer(message.content);
+  const Arguments = lexer(message.content);
   console.log('args:', Arguments);
 
   switch (Arguments[0]) {
     case 'pervert':
-      let pervertResult: true | string;
       let pervertResponse: string;
-      pervertResult = pervertCommand.checker(lexer(message.content), message);
+      const pervertResult: true | string = pervertCommand.checker(
+        lexer(message.content),
+        message,
+      );
       pervertResult === true
         ? (pervertResponse = await HandlePervert(message, Arguments))
         : (pervertResponse =
@@ -74,9 +77,11 @@ export default async (message: Discord.Message): Promise<string> => {
       return pervertResponse;
     case 'play':
     case 'p':
-      let youtubeResult: true | string;
       let youtubeResponse: string;
-      youtubeResult = youtubeCommand.checker(lexer(message.content), message);
+      const youtubeResult: true | string = youtubeCommand.checker(
+        lexer(message.content),
+        message,
+      );
       if (youtubeResult === true) {
         youtubeResponse = ':ok_hand:';
         HandleYoutube(message, Arguments);
